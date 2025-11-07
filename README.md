@@ -1,183 +1,193 @@
-dotnet run --project InvoiceApp/InvoiceApp.csproj`
+<div align="center">
 
-    *   To run the reminder task:
-        `dotnet run --project Tools/ReminderTask/ReminderTask.csproj`
+# 🧾 Company Invoice App  
+**A full-featured desktop invoicing system built with .NET 6, complete with PDF generation, email reminders, and a rich analytics dashboard.**
 
+![.NET](https://img.shields.io/badge/.NET-6.0-blue?style=flat-square&logo=dotnet)
+![SQLite](https://img.shields.io/badge/Database-SQLite-lightgrey?style=flat-square&logo=sqlite)
+![C#](https://img.shields.io/badge/Language-C%23-239120?style=flat-square&logo=csharp)
+![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
 
-# InvoiceApp - Implementation Complete
+</div>
 
-This is a complete implementation of the InvoiceApp MVP as specified in the requirements document.
+---
 
-## Project Structure
+## 📋 Overview
 
-```
+**Company Invoice App** is a robust and modern desktop application that allows small businesses to efficiently manage customers, create invoices, send automatic email reminders, and generate insightful analytics — all in one place.  
+
+It includes a separate background task for sending scheduled payment reminders via SMTP.
+
+---
+
+## 🏗️ Project Structure
+
 InvoiceApp/
 ├── InvoiceApp.sln
 ├── InvoiceApp/
-│   ├── InvoiceApp.csproj
-│   ├── Program.cs
-│   ├── Forms/
-│   │   ├── MainForm.cs (Dashboard with charts)
-│   │   ├── CustomerForm.cs (Customer CRUD + CSV import)
-│   │   ├── InvoiceListForm.cs (Invoice list view)
-│   │   ├── InvoiceForm.cs (Create/Edit invoices)
-│   │   ├── SettingsForm.cs (SMTP & app settings)
-│   │   └── ReportsForm.cs (Analytics & reports)
-│   ├── Models/
-│   │   ├── Customer.cs
-│   │   ├── Invoice.cs
-│   │   ├── InvoiceItem.cs
-│   │   └── ReminderLog.cs
-│   ├── Services/
-│   │   ├── DatabaseService.cs (SQLite management)
-│   │   ├── CustomerService.cs (Customer operations)
-│   │   ├── InvoiceService.cs (Invoice operations)
-│   │   ├── PdfService.cs (PDF generation with iText7)
-│   │   └── MailService.cs (Email via MailKit)
-│   └── Utils/
-│       ├── NumberingHelper.cs (Invoice number generation)
-│       ├── CsvImporter.cs (CSV import/export)
-│       ├── Logger.cs (Serilog wrapper)
-│       └── AppSettings.cs (Configuration management)
+│ ├── InvoiceApp.csproj
+│ ├── Program.cs
+│ ├── Forms/
+│ │ ├── MainForm.cs (Dashboard with charts)
+│ │ ├── CustomerForm.cs (Customer CRUD + CSV import)
+│ │ ├── InvoiceListForm.cs (Invoice list view)
+│ │ ├── InvoiceForm.cs (Create/Edit invoices)
+│ │ ├── SettingsForm.cs (SMTP & app settings)
+│ │ └── ReportsForm.cs (Analytics & reports)
+│ ├── Models/
+│ ├── Services/
+│ │ ├── DatabaseService.cs
+│ │ ├── CustomerService.cs
+│ │ ├── InvoiceService.cs
+│ │ ├── PdfService.cs
+│ │ └── MailService.cs
+│ └── Utils/
+│ ├── CsvImporter.cs
+│ ├── Logger.cs
+│ └── AppSettings.cs
 └── Tools/
-    └── ReminderTask/
-        ├── ReminderTask.csproj
-        ├── Program.cs (Console app for reminders)
-        ├── DatabaseService.cs
-        ├── MailService.cs
-        └── AppSettings.cs
-```
+└── ReminderTask/
+├── ReminderTask.csproj
+├── Program.cs
+├── DatabaseService.cs
+├── MailService.cs
+└── AppSettings.cs
 
-## Building the Application
 
-### Requirements
-- Visual Studio 2022 (or later)
-- .NET 6.0 SDK
-- Windows 10/11
+---
 
-### Build Steps
+## ⚙️ Installation & Setup
 
-1. Open `InvoiceApp.sln` in Visual Studio
-2. Restore NuGet packages (should happen automatically)
-3. Build the solution (Ctrl+Shift+B)
-4. Run the application (F5)
+### 🧱 Requirements
+- Visual Studio 2022 (or later)  
+- .NET 6.0 SDK  
+- Windows 10/11  
 
-### Command Line Build (if .NET SDK is available)
+### 💻 Build Steps
+1. Open `InvoiceApp.sln` in Visual Studio  
+2. Restore NuGet packages (automatically)  
+3. Build the solution (`Ctrl + Shift + B`)  
+4. Run the application (`F5`)
 
-```powershell
+### 🧾 Command Line (Alternative)
+```bash
 cd "d:\TERD\c#_freelance"
 dotnet restore
 dotnet build
 dotnet run --project InvoiceApp\InvoiceApp.csproj
-```
 
-## Features Implemented
+✨ Features
+👥 Customer Management
 
-### ✅ Customer Management
-- Create, Read, Update, Delete customers
-- CSV import for bulk customer creation
-- Customer list with search/filter
+Add, edit, delete customers
 
-### ✅ Invoice Management
-- Create invoices with automatic numbering (INV{YEAR}-{NNNN})
-- Add multiple line items with quantity and pricing
-- Automatic subtotal and total calculation
-- Tax support
-- Mark invoices as Paid/Unpaid
-- Automatic overdue detection
-- Invoice status tracking
+Import bulk customers via CSV
 
-### ✅ PDF Export
-- Generate professional PDF invoices using iText7
-- Save to Documents\InvoiceApp\Invoices\
-- Automatic PDF opening after generation
+Search and filter customer records
 
-### ✅ Email Reminders
-- ReminderTask console application
-- Configurable reminder settings (days after due, max reminders, interval)
-- Email overdue invoices via SMTP
-- Reminder logging to track sent emails
-- Respects reminder intervals and max limits
+💸 Invoice Management
 
-### ✅ Dashboard & Reports
-- Dashboard with key metrics:
-  - Total revenue
-  - Outstanding amounts
-  - Overdue invoice count
-- Top 10 customers by revenue (chart)
-- Reports page with detailed analytics
+Auto invoice numbering: INV{YEAR}-{NNNN}
 
-### ✅ Settings
-- SMTP configuration
-- Company information
-- Reminder settings
-- Test SMTP connection
+Multiple line items with quantity, pricing, and tax
 
-### ✅ Database
-- SQLite database stored in %APPDATA%\InvoiceApp\invoice_app.db
-- Automatic schema creation on first run
-- Transaction support for data integrity
-- Foreign key relationships
+Auto subtotal and total calculation
 
-### ✅ Logging
-- Serilog file logging
-- Logs stored in %APPDATA%\InvoiceApp\Logs\
-- 30-day log retention
+Mark invoices as Paid / Unpaid
 
-## First Run Setup
+Overdue tracking and invoice status
 
-1. Launch InvoiceApp.exe
-2. The application will automatically create the database in %APPDATA%\InvoiceApp\
-3. Go to Settings menu to configure:
-   - Company Name
-   - Company Email
-   - SMTP settings for email reminders
-4. Create your first customer
-5. Create your first invoice
+📄 PDF Export
 
-## Scheduling Reminders
+Generate professional PDF invoices using iText7
 
-To schedule automatic reminder emails:
+Save to Documents\InvoiceApp\Invoices\
 
-1. Open Windows Task Scheduler
-2. Create a new task:
-   - **Action:** Start a program
-   - **Program:** `d:\TERD\c#_freelance\Tools\ReminderTask\bin\Debug\net6.0\ReminderTask.exe`
-   - **Trigger:** Daily at 9:00 AM
-   - **Run with highest privileges:** Optional
-3. Save the task
+Automatically open PDF after generation
 
-The ReminderTask will:
-- Query for overdue invoices
-- Check reminder history
-- Send emails only when:
-  - Invoice is overdue by configured days
-  - Max reminders not reached
-  - Interval days passed since last reminder
+📧 Email Reminders
 
-## Sample Data
+Separate ReminderTask console app for automation
 
-### Sample CSV for Customer Import
+Configurable:
 
-Create a file named `customers.csv`:
+Days after due date
 
-```csv
-Name,Address,Postcode,Email,Phone
-Acme Corporation,123 Main St,12345,billing@acme.com,555-1234
-TechStart Inc,456 Oak Ave,23456,accounts@techstart.com,555-5678
-Global Solutions,789 Pine Rd,34567,payments@globalsol.com,555-9012
-Local Business,321 Elm St,45678,info@localbiz.com,555-3456
-Enterprise Co,654 Maple Dr,56789,finance@enterprise.com,555-7890
-```
+Max reminders
 
-Import via: Customers → Import CSV
+Interval between reminders
 
-## Configuration File Location
+Sends overdue invoice emails via SMTP
 
-`%APPDATA%\InvoiceApp\settings.json`
+Logs reminder history for accuracy
 
-Example:
-```json
+📊 Dashboard & Reports
+
+Real-time statistics:
+
+Total revenue
+
+Outstanding balance
+
+Overdue invoice count
+
+Top 10 customers by revenue
+
+Reports page with detailed analytics
+
+⚙️ Settings
+
+SMTP configuration (Gmail, Outlook, etc.)
+
+Company information setup
+
+Reminder interval customization
+
+Test SMTP connection directly from app
+
+🗄️ Database
+
+SQLite stored in %APPDATA%\InvoiceApp\invoice_app.db
+
+Auto schema creation on first run
+
+Supports transactions and foreign keys
+
+🧾 Logging
+
+Uses Serilog for structured file logging
+
+Logs stored in %APPDATA%\InvoiceApp\Logs\
+
+30-day log retention
+
+🕒 Running Reminder Task
+Manual Run
+dotnet run --project Tools/ReminderTask/ReminderTask.csproj
+
+Scheduled Run (Windows Task Scheduler)
+
+Open Task Scheduler
+
+Create a new task
+
+Action: Start a program
+
+Program:
+
+d:\TERD\c#_freelance\Tools\ReminderTask\bin\Debug\net6.0\ReminderTask.exe
+
+
+Trigger: Daily at 9:00 AM
+
+Run with highest privileges: Optional
+
+🧰 Configuration
+📁 File Location
+
+%APPDATA%\InvoiceApp\settings.json
+
+🧩 Example Configuration
 {
   "CompanyName": "My Company",
   "CompanyEmail": "billing@mycompany.com",
@@ -196,66 +206,46 @@ Example:
     "IntervalDays": 3
   }
 }
-```
 
-## SMTP Configuration Tips
+💌 SMTP Configuration Tips
+Provider	Host	Port	SSL	Notes
+Gmail	smtp.gmail.com	587	✅	Use App Password (2FA required)
+Outlook	smtp.office365.com	587	✅	Use Office 365 credentials
+Custom SMTP	(varies)	—	—	Refer to provider docs
+🧾 Sample Data (CSV Import)
 
-### Gmail
-- Use App Password (not regular password)
-- Enable 2-factor authentication
-- Generate App Password in Google Account settings
-- Host: smtp.gmail.com, Port: 587, SSL: True
+customers.csv
 
-### Outlook/Office365
-- Host: smtp.office365.com, Port: 587, SSL: True
+Name,Address,Postcode,Email,Phone
+Acme Corporation,123 Main St,12345,billing@acme.com,555-1234
+TechStart Inc,456 Oak Ave,23456,accounts@techstart.com,555-5678
+Global Solutions,789 Pine Rd,34567,payments@globalsol.com,555-9012
+Local Business,321 Elm St,45678,info@localbiz.com,555-3456
+Enterprise Co,654 Maple Dr,56789,finance@enterprise.com,555-7890
 
-### Custom SMTP
-- Configure according to your email provider's documentation
 
-## Database Location
+Import via: Customers → Import CSV
 
-`%APPDATA%\InvoiceApp\invoice_app.db`
+🧩 Technologies Used
 
-To backup: Copy this file to a safe location
+.NET 6 — Modern cross-platform framework
 
-To restore: Replace the file and restart the application
+Windows Forms — Desktop UI framework
 
-## Troubleshooting
+SQLite — Embedded local database
 
-### Database not created
-- Ensure write permissions to %APPDATA%
-- Run as administrator once
+Dapper — Lightweight ORM
 
-### PDF not generating
-- Check Documents\InvoiceApp\Invoices\ folder exists
-- Ensure disk space available
+iText7 — PDF generation library
 
-### Emails not sending
-- Test SMTP in Settings → Test Connection
-- Check firewall/antivirus
-- Verify SMTP credentials
-- Check spam folder
+MailKit — SMTP email sending
 
-### Charts not displaying
-- Ensure all NuGet packages restored
-- Rebuild solution
+ScottPlot — Chart and graph visualization
 
-## Technologies Used
+Serilog — File-based structured logging
 
-- **.NET 6** - Modern .NET framework
-- **Windows Forms** - Desktop UI
-- **SQLite** - Lightweight embedded database
-- **Dapper** - Micro-ORM for database access
-- **iText7** - PDF generation
-- **MailKit** - Email sending
-- **ScottPlot** - Charting library
-- **Serilog** - Logging framework
-- **Newtonsoft.Json** - JSON configuration
+Newtonsoft.Json — Config file management
 
-## License
+🧾 License
 
-Proprietary - All rights reserved
-
-## Support
-
-For issues or questions, contact the development team.
+Proprietary — All rights reserved.
