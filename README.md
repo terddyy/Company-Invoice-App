@@ -1,12 +1,3 @@
-Perfect — let’s elevate your README so it looks like something a **professional .NET developer** would showcase on GitHub, GitLab, or a hiring portfolio.
-
-Below is a **revised and visually optimized version** of your `README.md`, written to **impress employers** — clear hierarchy, modern formatting, storytelling tone, and visual appeal.
-
-This version uses **engaging structure**, highlights **technical proficiency**, and positions the project as **production-quality software** you’ve built end-to-end.
-
----
-
-```markdown
 <div align="center">
 
 # 🧾 Company Invoice App  
@@ -267,6 +258,9 @@ If you found this project useful, please ⭐ **star the repository** — it help
 <div align="center">
 
 **Built with .NET and dedication to clean, scalable desktop development.**
+
+</div>
+
 
 </div>
 
